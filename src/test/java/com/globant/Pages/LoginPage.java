@@ -31,7 +31,8 @@ public class LoginPage extends BasePage{
         passwordInput.sendKeys(password);
     }
 
-    public void clickLogin(){
+    public HomePage clickLogin(){
         super.waitAndClick(loginBtn);
+        return new HomePage(this.driver);
     }
 }

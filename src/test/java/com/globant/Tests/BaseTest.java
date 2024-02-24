@@ -1,6 +1,7 @@
 package com.globant.Tests;
 
 import com.globant.AppTest;
+import com.globant.Pages.HomePage;
 import com.globant.Pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,6 +18,7 @@ public class BaseTest {
     private static final Logger log = Logger.getLogger(BaseTest.class.getName());
     private static final String driverPath =  "src\\utils\\chromedriver.exe";
     private static final String url =  "https://www.saucedemo.com";
+    private HomePage homePage;
 
     @BeforeClass(alwaysRun = true)
     public void initDriver() {
@@ -25,11 +27,15 @@ public class BaseTest {
         login();
     }
 
+    public HomePage getHomePage() {
+        return homePage;
+    }
+
     public void login() {
         LoginPage loginPage = new LoginPage(driver, url);
         loginPage.putUsername(username);
         loginPage.putPassword(password);
-        loginPage.clickLogin();
+        this.homePage = loginPage.clickLogin();
     }
 
     public void logInfo(String msg){
