@@ -15,33 +15,7 @@ import org.testng.annotations.BeforeTest;
  */
 public class AppTest 
 {
-    private Logger log = Logger.getLogger(AppTest.class.getName());
-    private WebDriver driver;
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        log.info("Si lo hizo");
-        assertTrue( true );
-    }
 
-    @BeforeSuite
-    public void googleSetUp(){
-        String url = "https://www.saucedemo.com";
-
-        String driverPath = "src\\utils\\chromedriver.exe";
-        System.setProperty("webdriver.chrome.driver", driverPath);
-        driver = new ChromeDriver();
-        driver.navigate().to(url);
-        log.info("Chrome initialized");
-    }
-
-    @BeforeTest
-    public void logging(){
-        
-        log.info("Loggin made");
-    }
+    
 
 }
