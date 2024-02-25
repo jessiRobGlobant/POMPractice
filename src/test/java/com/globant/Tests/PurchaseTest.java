@@ -1,9 +1,7 @@
 package com.globant.Tests;
 
-import com.globant.Pages.CartPage;
-import com.globant.Pages.CheckoutOverviewPage;
-import com.globant.Pages.CheckoutPage;
-import com.globant.Pages.HomePage;
+import com.globant.Pages.*;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.github.javafaker.Faker;
@@ -11,16 +9,17 @@ import com.github.javafaker.Faker;
 public class PurchaseTest extends BaseTest{
 
     // Attributes
-    private HomePage homePage;
     private CartPage cartPage;
     private CheckoutPage checkoutPage;
     private CheckoutOverviewPage checkoutOverviewPage;
+    private SuccessCheckPage successCheckPage;
     private final Faker faker = new Faker();
 
-
+    // Tests
     @Test(priority = 1)
     public void addProduct(){
-        homePage = this.getHomePage();
+        // Attributes
+        HomePage homePage = this.getHomePage();
         String productName = homePage.addRandomProduct();
         this.logInfo(String.format("Added product %s", productName));
         cartPage = homePage.getToCart();
@@ -49,5 +48,15 @@ public class PurchaseTest extends BaseTest{
         logInfo(String.format(
                 "Inserted user data. First Name: %s, Last Name: %s, Zip Code: %s",
                 firstName, lastName, zipCode));
+    }
+
+    @Test(priority = 4)
+    public void overviewToFinish(){
+        successCheckPage = checkoutOverviewPage.finishPurchase();
+    }
+    @Test(priority = 5)
+    public void checkFinishText(){
+        Assert.assertEquals(successCheckPage.getFinishTxt(),
+                "Thank you for your order!");
     }
 }
