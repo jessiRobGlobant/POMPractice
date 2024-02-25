@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 public class SuccessCheckPage extends BasePage{
 
     // Elements
-    @FindBy(css = "h2")
+    @FindBy(css = "h2") // With class would be class="complete-header"
     private WebElement finishTxt;
 
     // Constructor
