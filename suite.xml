@@ -11,4 +11,9 @@
       <class name="com.globant.Tests.RemoveProdTest"/>
     </classes>
   </test>
+  <test name="Logout" preserve-order="true" >
+    <classes>
+      <class name="com.globant.Tests.LogoutTest"/>
+    </classes>
+  </test>
 </suite>

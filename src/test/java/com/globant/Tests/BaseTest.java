@@ -1,6 +1,5 @@
 package com.globant.Tests;
 
-import com.globant.AppTest;
 import com.globant.Pages.HomePage;
 import com.globant.Pages.LoginPage;
 import org.openqa.selenium.WebDriver;
@@ -45,6 +44,6 @@ public class BaseTest {
     @AfterClass(alwaysRun = true)
     public void closeDriver() {
         logInfo("Clossing Chrome");
-//        driver.close();
+        driver.close();
     }
 }

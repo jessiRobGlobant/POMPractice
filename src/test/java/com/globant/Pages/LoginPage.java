@@ -15,10 +15,15 @@ public class LoginPage extends BasePage{
     private WebElement passwordInput;
     @FindBy(id = "login-button")
     private WebElement loginBtn;
+    @FindBy(className = "login_logo")
+    private WebElement loginLogo;
 
     public LoginPage(WebDriver driver, String url) {
         super(driver);
         driver.get(url);
+    }
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
 
     public void putUsername(String username){
@@ -34,5 +39,10 @@ public class LoginPage extends BasePage{
     public HomePage clickLogin(){
         super.waitAndClick(loginBtn);
         return new HomePage(this.driver);
+    }
+
+    public String getTittle(){
+        super.waitTillVisible(loginLogo);
+        return loginLogo.getText();
     }
 }

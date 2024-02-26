@@ -6,6 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 
 public class BasePage {
 
@@ -26,20 +28,20 @@ public class BasePage {
     public BasePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        // this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     // Waits
-//    public void waitTillVisible(WebElement element){
-//        getWait().until(ExpectedConditions.visibilityOf(element));
-//    }
-//
-//    public void waitTillClickable(WebElement element){
-//        getWait().until(ExpectedConditions.elementToBeClickable(element));
-//    }
+    protected void waitTillVisible(WebElement element){
+        getWait().until(ExpectedConditions.visibilityOf(element));
+    }
 
-    public void waitAndClick(WebElement element) {
-        // waitTillClickable(element);
+    protected void waitTillClickable(WebElement element){
+        getWait().until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    protected void waitAndClick(WebElement element) {
+        waitTillClickable(element);
         element.click();
     }
 }

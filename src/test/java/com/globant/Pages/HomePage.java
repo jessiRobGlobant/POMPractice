@@ -15,11 +15,17 @@ public class HomePage extends BasePage{
     List<WebElement> productsCards;
     @FindBy(className = "shopping_cart_link")
     WebElement shoppingCartBtn;
+    @FindBy(id = "react-burger-menu-btn")
+    WebElement menuBtn;
+    @FindBy(id = "logout_sidebar_link")
+    WebElement logoutLnk;
 
+    // Constructor
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
+    // Methods
     public String addRandomProduct(){
         // Get Random product
         Random rand = new Random();
@@ -32,6 +38,15 @@ public class HomePage extends BasePage{
     public CartPage getToCart(){
         super.waitAndClick(shoppingCartBtn);
         return new CartPage(this.driver);
+    }
+
+    public void openMenu(){
+        super.waitAndClick(menuBtn);
+    }
+
+    public LoginPage clickLogout(){
+        super.waitAndClick(logoutLnk);
+        return new LoginPage(this.driver);
     }
 
 }
