@@ -11,13 +11,19 @@ import java.util.Set;
 public class RemoveProdTest extends BaseTest{
 
     // Attributes
-    private CartPage cartPage;
-
     private final Set<String> products = new HashSet<>();
 
-    @Test(priority = 1)
-    public void addProducts(){
+    // Test
+    @Test
+    public void removeProductTest(){
         HomePage homePage = this.getHomePage();
+        CartPage cartPage = addProducts(homePage);
+        removeProducts(cartPage);
+        checkIfEmpty(cartPage);
+    }
+
+    // Test steps methods
+    private CartPage addProducts(HomePage homePage){
 
         while (products.size() < 3){
             String productName = homePage.addRandomProduct();
@@ -25,16 +31,14 @@ public class RemoveProdTest extends BaseTest{
             this.logInfo(String.format("Added product %s", productName));
         }
 
-        cartPage = homePage.getToCart();
+        return homePage.getToCart();
     }
 
-    @Test(priority = 2)
-    public void removeProducts(){
+    private void removeProducts(CartPage cartPage){
         cartPage.removeProducts(products);
     }
 
-    @Test(priority = 3)
-    public void checkIfEmpty(){
+    private void checkIfEmpty(CartPage cartPage){
         Assert.assertEquals(cartPage.numProducts(), 0);
     }
 }

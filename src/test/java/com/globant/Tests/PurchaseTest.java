@@ -9,29 +9,32 @@ import com.github.javafaker.Faker;
 public class PurchaseTest extends BaseTest{
 
     // Attributes
-    private CartPage cartPage;
-    private CheckoutPage checkoutPage;
-    private CheckoutOverviewPage checkoutOverviewPage;
     private SuccessCheckPage successCheckPage;
     private final Faker faker = new Faker();
 
-    // Tests
-    @Test(priority = 1)
-    public void addProduct(){
-        // Attributes
+    // Test
+    @Test()
+    public void purchaseTest(){
         HomePage homePage = this.getHomePage();
+        CartPage cartPage = addProduct(homePage);
+        CheckoutPage checkoutPage = goToCheckout(cartPage);
+        CheckoutOverviewPage checkoutOverviewPage = addCheckoutInfo(checkoutPage);
+        SuccessCheckPage successCheckPage = overviewToFinish(checkoutOverviewPage);
+        checkFinishText(successCheckPage);
+    }
+
+    // Test steps methods
+    private CartPage addProduct(HomePage homePage){
         String productName = homePage.addRandomProduct();
         this.logInfo(String.format("Added product %s", productName));
-        cartPage = homePage.getToCart();
+        return homePage.getToCart();
     }
 
-    @Test(priority = 2)
-    public void goToCheckout(){
-        checkoutPage = cartPage.goToCheckout();
+    private CheckoutPage goToCheckout(CartPage cartPage){
+        return cartPage.goToCheckout();
     }
 
-    @Test(priority = 3)
-    public void addCheckoutInfo(){
+    private CheckoutOverviewPage addCheckoutInfo(CheckoutPage checkoutPage){
         // Get fake data
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
@@ -42,20 +45,18 @@ public class PurchaseTest extends BaseTest{
         checkoutPage.putLastName(lastName);
         checkoutPage.putPostalCode(zipCode);
 
-        // Go to checkout overview
-        checkoutOverviewPage = checkoutPage.goToCheckoutOverview();
-
         logInfo(String.format(
                 "Inserted user data. First Name: %s, Last Name: %s, Zip Code: %s",
                 firstName, lastName, zipCode));
+
+        return checkoutPage.goToCheckoutOverview();
     }
 
-    @Test(priority = 4)
-    public void overviewToFinish(){
-        successCheckPage = checkoutOverviewPage.finishPurchase();
+    private SuccessCheckPage overviewToFinish( CheckoutOverviewPage checkoutOverviewPage){
+        return checkoutOverviewPage.finishPurchase();
     }
-    @Test(priority = 5)
-    public void checkFinishText(){
+
+    private void checkFinishText(SuccessCheckPage successCheckPage){
         Assert.assertEquals(successCheckPage.getFinishTxt(),
                 "Thank you for your order!");
     }
