@@ -29,6 +29,7 @@ public class CartPage extends BasePage{
         return new CheckoutPage(this.driver);
     }
 
+    // Methods
     public String getProductName(WebElement product){
         // super.waitTillVisible(product);
         WebElement productLbl = product.findElement(By.className("inventory_item_name"));

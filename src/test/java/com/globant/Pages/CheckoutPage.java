@@ -27,6 +27,7 @@ public class CheckoutPage extends BasePage{
         firstNameInput.sendKeys(firstName);
     }
 
+    // Methods
     public void putLastName(String lastName){
         super.waitAndClick(lastNameInput);
         lastNameInput.sendKeys(lastName);

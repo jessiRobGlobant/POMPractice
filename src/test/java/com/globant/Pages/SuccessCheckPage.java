@@ -15,6 +15,7 @@ public class SuccessCheckPage extends BasePage{
         super(driver);
     }
 
+    // Method
     public String getFinishTxt() {
         return finishTxt.getText();
     }

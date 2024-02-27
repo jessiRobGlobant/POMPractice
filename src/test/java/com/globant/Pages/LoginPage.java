@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage extends BasePage{
 
     // Elements
-    @FindBy(id = "user-name")
+    @FindBy(xpath = "//*[@id='user-name']") //(id = "user-name")
     private WebElement usernameInput;
     @FindBy(id = "password")
     private WebElement passwordInput;
@@ -18,6 +18,7 @@ public class LoginPage extends BasePage{
     @FindBy(className = "login_logo")
     private WebElement loginLogo;
 
+    // Constructors
     public LoginPage(WebDriver driver, String url) {
         super(driver);
         driver.get(url);
@@ -26,6 +27,7 @@ public class LoginPage extends BasePage{
         super(driver);
     }
 
+    // Methods
     public void putUsername(String username){
         super.waitAndClick(usernameInput);
         usernameInput.sendKeys(username);
@@ -44,5 +46,10 @@ public class LoginPage extends BasePage{
     public String getTittle(){
         super.waitTillVisible(loginLogo);
         return loginLogo.getText();
+    }
+
+    public String getLoginBtnText(){
+        super.waitTillVisible(loginBtn);
+        return loginBtn.getAttribute("value");
     }
 }
